@@ -18,4 +18,6 @@ inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True)
 # 运行模型
 with torch.no_grad():
     outputs = model(**inputs)
-    print("模型输出：", outputs.logits)  # 分类任务查看 logits，生成任务查看生成结果
+    # 将 Tensor 转换为 Python 数值
+    rating = outputs.logits.item()
+    print(f"该番剧的预测评分为: {rating}")
